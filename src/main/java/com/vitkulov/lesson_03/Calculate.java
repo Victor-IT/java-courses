@@ -1,4 +1,4 @@
-package com.vitkulov.lesson03;
+package com.vitkulov.lesson_03;
 
 import java.text.DecimalFormat;
 import java.util.Locale;
