@@ -6,67 +6,59 @@ import java.util.Scanner;
  * Calculator. Supports user inputs
  *
  * @author vitkulov
+ * @version 1.0
  * @since 03.08.2017
  */
 public class InteractRunner {
     private final Calculator calculator;
+    private final IO io;
 
 
-    private InteractRunner(final Calculator calculator) {
+    private InteractRunner(final Calculator calculator, final IO io) {
         this.calculator = calculator;
+        this.io = io;
     }
 
     public void start() {
         boolean reuse = false;
-        boolean next;
-        Scanner scanner = new Scanner(System.in);
 
-        do {
-            double first;
-            double second;
-            String operation;
+        try (final Validator validator = new Validator(io)) {
 
-            if (reuse) {
-                first = calculator.getResult();
-                System.out.println(first);
-            } else {
-                System.out.println("Enter the first number:");
-                first = scanner.nextDouble();
-            }
+            do {
+                double first;
+                double second;
+                String operation;
 
-            System.out.println("Enter the operation symbol (+ - * / ^):");
-            operation = scanner.next();
+                if (reuse) {
+                    first = calculator.getResult();
+                    System.out.println(first);
+                } else {
+                    first = validator.getDouble("Enter the first number:");
+                }
 
-            System.out.println("Enter the second number:");
-            second = scanner.nextDouble();
+                operation = validator.getOperator("Enter the operation symbol (+ - * / ^):");
+                second = validator.getDouble("Enter the second number:");
 
-            calculator.calc(first, operation, second);
-            System.out.println(
-                    String.format("%s %s %s = %s",
-                            first, operation, second, calculator.getResult()
-                    )
-            );
+                calculator.calc(operation, first, second);
+                System.out.println(
+                        String.format("%s %s %s = %s",
+                                first, operation, second, calculator.getResult()
+                        )
+                );
 
-            System.out.println("Do you want reuse the result or exit? y/n/e:");
-            String temp = scanner.next();
+                reuse = validator.compare("Do you want reuse the result? y/n:", "y");
 
-            if (temp.toLowerCase().equals("y")) {
-                reuse = true;
-                next = true;
-            } else if (temp.toLowerCase().equals("e")) {
-                next = false;
-            } else {
-                reuse = false;
-                next = true;
-            }
-        } while (next);
-
-        scanner.close();
+            } while (validator.compare("Do you want to continue? y/n", "y"));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void main(String[] args) {
-        new InteractRunner(new Calculator())
-                .start();
+        new InteractRunner(
+                new Calculator(),
+                new ConsoleIO(new Scanner(System.in), System.out)
+        ).start();
     }
 
 }

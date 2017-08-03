@@ -12,14 +12,14 @@ public class ArgRunner {
 
         Calculator calculator = new Calculator();
         calculator.calc(
-                Double.parseDouble(args[0]),
-                args[1],
+                args[0],
+                Double.parseDouble(args[1]),
                 Double.parseDouble(args[2])
         );
 
         System.out.println(String.format(
                 "%s %s %s = %s",
-                args[0], args[1], args[2],
+                args[1], args[0], args[2],
                 calculator.getResult())
         );
 

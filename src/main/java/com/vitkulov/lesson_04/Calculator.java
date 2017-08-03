@@ -7,6 +7,7 @@ import java.util.Locale;
  * Calculator realisation. Supports secondary usage of the previous calculation.
  *
  * @author vitkulov
+ * @version 1.0
  * @since 27.07.2017
  */
 public class Calculator {
@@ -15,10 +16,6 @@ public class Calculator {
 
     public double getResult() {
         return result;
-    }
-
-    public void clearResult() {
-        this.result = 0;
     }
 
     /**
@@ -95,7 +92,7 @@ public class Calculator {
      * @param operation operations + - * / ^
      * @param second    second argument
      */
-    public void calc(double first, String operation, double second) {
+    public void calc(String operation, double first, double second) {
         switch (operation) {
             case "+":
                 this.add(first, second);
@@ -113,7 +110,7 @@ public class Calculator {
                 this.exponent(first, second);
                 break;
             default:
-                throw new UnsupportedOperationException("Please, input correct parameters. For example: 1 + 2");
+                throw new UnsupportedOperationException("Please, input correct parameters. Example: 1 + 2");
         }
     }
 
