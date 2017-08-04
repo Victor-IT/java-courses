@@ -3,10 +3,11 @@ package com.vitkulov.lesson_04;
 import java.util.Scanner;
 
 /**
- * Calculator. Supports user inputs
+ * Interactive calculator.
+ * Supports user inputs
  *
  * @author vitkulov
- * @version 1.0
+ * @version 2.0
  * @since 03.08.2017
  */
 public class InteractRunner {
@@ -60,5 +61,4 @@ public class InteractRunner {
                 new ConsoleIO(new Scanner(System.in), System.out)
         ).start();
     }
-
 }

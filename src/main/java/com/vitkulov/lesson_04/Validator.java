@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Class for data input validation.
+ * Class for user data input validation.
  *
  * @author vitkulov
  * @version 1.0
@@ -22,7 +22,8 @@ public class Validator implements AutoCloseable {
     }
 
     /**
-     * Get number from input. Repeats until input were correct
+     * Get number from input.
+     * Repeats until input is correct
      *
      * @param message - prompt message
      * @return int number
@@ -42,6 +43,13 @@ public class Validator implements AutoCloseable {
         throw new NumberFormatException();
     }
 
+    /**
+     * Get string from input.
+     * Repeats until the string is equals to one of arithmetic operators
+     *
+     * @param message
+     * @return
+     */
     public String getOperator(String message) {
 
         boolean invalid;

@@ -12,6 +12,9 @@ import java.util.Locale;
  */
 public class Calculator {
 
+    /**
+     * Store result of operations
+     */
     private double result;
 
     public double getResult() {
@@ -19,40 +22,40 @@ public class Calculator {
     }
 
     /**
-     * Calculate addition
+     * Adds two numbers
      *
-     * @param first  first argument
-     * @param second second argument
+     * @param first  first number
+     * @param second second number
      */
     public void add(double first, double second) {
         this.result = first + second;
     }
 
     /**
-     * Calculate subtraction
+     * Subtracts the second number from the first
      *
-     * @param first  first argument
-     * @param second second argument
+     * @param first  first number
+     * @param second second number
      */
     public void subtract(double first, double second) {
         this.result = first - second;
     }
 
     /**
-     * Calculate multiplication
+     * Multiplies two numbers
      *
-     * @param first  first argument
-     * @param second second argument
+     * @param first  first number
+     * @param second second number
      */
     public void multiply(double first, double second) {
         this.result = first * second;
     }
 
     /**
-     * Calculate division. Throws exception if second argument is 0
+     * Divides the first number by the second. Throws exception if second number is 0
      *
-     * @param first  first argument
-     * @param second second argument
+     * @param first  first number
+     * @param second second number
      */
     public void divide(double first, double second) {
         if (second != 0d) {
@@ -72,10 +75,10 @@ public class Calculator {
     }
 
     /**
-     * Calculate exponentiation.
+     * Raises the first number in the power of the second number.
      *
-     * @param first  base argument
-     * @param second exponent argument
+     * @param first  first number
+     * @param second exponent number
      */
     public void exponent(double first, double second) {
         double temp = 1;
@@ -86,11 +89,18 @@ public class Calculator {
     }
 
     /**
-     * Calculate result based on specified operation
+     * Clears result variable
+     */
+    public void clear() {
+        this.result = 0;
+    }
+
+    /**
+     * Calculates result based on specified operation
      *
-     * @param first     first argument
+     * @param first     first number
      * @param operation operations + - * / ^
-     * @param second    second argument
+     * @param second    second number
      */
     public void calc(String operation, double first, double second) {
         switch (operation) {
@@ -113,5 +123,4 @@ public class Calculator {
                 throw new UnsupportedOperationException("Please, input correct parameters. Example: 1 + 2");
         }
     }
-
 }

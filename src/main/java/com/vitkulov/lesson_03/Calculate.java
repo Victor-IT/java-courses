@@ -20,21 +20,42 @@ public class Calculate {
         Calculate calc = new Calculate();
 
         System.out.println(String.format("%s + %s = %s", first, second, calc.add(first, second)));
-        System.out.println(String.format("%s - %s = %s", first, second, calc.substract(first, second)));
+        System.out.println(String.format("%s - %s = %s", first, second, calc.subtract(first, second)));
         System.out.println(String.format("%s * %s = %s", first, second, calc.multiply(first, second)));
         System.out.println(String.format("%s / %s = %s", first, second, calc.divide(first, second)));
         System.out.println(String.format("%s ^ %s = %s", first, second, calc.pow(first, second)));
     }
 
-    private int add(int first, int second) {
+    /**
+     * Adds two numbers
+     *
+     * @param first  first number
+     * @param second second number
+     * @return sum of two numbers
+     */
+    public int add(int first, int second) {
         return first + second;
     }
 
-    private int multiply(int first, int second) {
+    /**
+     * Multiply two numbers
+     *
+     * @param first  first number
+     * @param second second number
+     * @return result of multiplication
+     */
+    public int multiply(int first, int second) {
         return first * second;
     }
 
-    private double divide(int first, int second) {
+    /**
+     * Divides the first number on the second
+     *
+     * @param first  first number
+     * @param second second number
+     * @return result of division
+     */
+    public double divide(int first, int second) {
         double d = (double) first / second;
 
         Locale locale = new Locale("en");
@@ -46,11 +67,25 @@ public class Calculate {
         return Double.parseDouble(format);
     }
 
-    private int substract(int first, int second) {
+    /**
+     * Subtracts the second number from the first
+     *
+     * @param first  first number
+     * @param second second number
+     * @return result of subtraction
+     */
+    public int subtract(int first, int second) {
         return first - second;
     }
 
-    private int pow(int first, int second) {
+    /**
+     * Elevate the first number
+     *
+     * @param first  first number
+     * @param second second number - the power of the first
+     * @return result of elevation
+     */
+    public int pow(int first, int second) {
         int result = 1;
         for (int i = 0; i < second; i++) {
             result *= first;

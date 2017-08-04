@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 /**
  * Class for reading input and print output in console.
+ * Based on scanner class
  *
  * @author vitkulov
  * @version 1.0
@@ -23,11 +24,21 @@ public class ConsoleIO implements IO {
         this.out = out;
     }
 
+    /**
+     * Read next line on input
+     *
+     * @return string line
+     */
     @Override
     public String read() {
         return this.scanner.next();
     }
 
+    /**
+     * Prints value to output
+     *
+     * @param value value to string
+     */
     @Override
     public void print(Object value) {
         this.out.println(value);
