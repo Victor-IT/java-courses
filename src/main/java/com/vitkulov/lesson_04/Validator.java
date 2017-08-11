@@ -32,12 +32,12 @@ public class Validator implements AutoCloseable {
         boolean invalid;
         do {
             try {
-                this.io.print(message);
+                System.out.println(message);
                 return Double.parseDouble(this.io.read());
             } catch (NumberFormatException n) {
                 invalid = true;
                 LOG.error("Convert number error", n);
-                io.print("Please enter the number.");
+                System.out.println("Please enter the number.");
             }
         } while (invalid);
         throw new NumberFormatException();
@@ -56,28 +56,17 @@ public class Validator implements AutoCloseable {
         List<String> ops = Arrays.asList("+", "-", "*", "/", "^");
         String operator;
         do {
-            this.io.print(message);
+            System.out.println(message);
             operator = this.io.read();
             if (ops.contains(operator)) {
                 return operator;
             } else {
                 invalid = true;
                 LOG.error("No such operator present");
-                io.print("Please enter the correct operation symbol");
+                System.out.println("Please enter the correct operation symbol");
             }
         } while (invalid);
         throw new UnsupportedOperationException("No such operator present: " + operator);
-    }
-
-    /**
-     * Get string from input.
-     *
-     * @param message - prompt message
-     * @return string
-     */
-    public String getString(String message) {
-        this.io.print(message);
-        return this.io.read();
     }
 
     /**
@@ -88,7 +77,7 @@ public class Validator implements AutoCloseable {
      * @return boolean
      */
     public boolean compare(final String message, final String answer) {
-        this.io.print(message);
+        System.out.println(message);
         return answer.equals(io.read());
     }
 

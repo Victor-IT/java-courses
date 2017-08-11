@@ -15,7 +15,7 @@ public class InteractRunner {
     private final IO io;
 
 
-    private InteractRunner(final Calculator calculator, final IO io) {
+    public InteractRunner(final Calculator calculator, final IO io) {
         this.calculator = calculator;
         this.io = io;
     }
@@ -41,7 +41,7 @@ public class InteractRunner {
                 second = validator.getDouble("Enter the second number:");
 
                 calculator.calc(operation, first, second);
-                System.out.println(
+                io.println(
                         String.format("%s %s %s = %s",
                                 first, operation, second, calculator.getResult()
                         )

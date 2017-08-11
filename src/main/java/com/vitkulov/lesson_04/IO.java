@@ -12,5 +12,5 @@ public interface IO {
      *
      * @param value value to string
      */
-    void print(Object value);
+    void println(Object value);
 }

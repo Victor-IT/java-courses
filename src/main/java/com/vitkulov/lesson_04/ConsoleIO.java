@@ -7,7 +7,7 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * Class for reading input and print output in console.
+ * Class for reading input and println output in console.
  * Based on scanner class
  *
  * @author vitkulov
@@ -40,7 +40,7 @@ public class ConsoleIO implements IO {
      * @param value value to string
      */
     @Override
-    public void print(Object value) {
+    public void println(Object value) {
         this.out.println(value);
     }
 

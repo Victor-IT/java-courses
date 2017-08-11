@@ -10,13 +10,14 @@ import java.util.Locale;
  * @version 1.0
  * @since 27.07.2017
  */
-public class Calculator {
+public class Calculator implements ICalculator {
 
     /**
      * Store result of operations
      */
     private double result;
 
+    @Override
     public double getResult() {
         return result;
     }
@@ -27,18 +28,9 @@ public class Calculator {
      * @param first  first number
      * @param second second number
      */
+    @Override
     public void add(double first, double second) {
         this.result = first + second;
-    }
-
-    /**
-     * Subtracts the second number from the first
-     *
-     * @param first  first number
-     * @param second second number
-     */
-    public void subtract(double first, double second) {
-        this.result = first - second;
     }
 
     /**
@@ -47,8 +39,21 @@ public class Calculator {
      * @param first  first number
      * @param second second number
      */
+    @Override
     public void multiply(double first, double second) {
         this.result = first * second;
+    }
+
+
+    /**
+     * Subtracts the second number from the first
+     *
+     * @param first  first number
+     * @param second second number
+     */
+    @Override
+    public void subtract(double first, double second) {
+        this.result = first - second;
     }
 
     /**
@@ -57,6 +62,7 @@ public class Calculator {
      * @param first  first number
      * @param second second number
      */
+    @Override
     public void divide(double first, double second) {
         if (second != 0d) {
 
@@ -80,6 +86,7 @@ public class Calculator {
      * @param first  first number
      * @param second exponent number
      */
+    @Override
     public void exponent(double first, double second) {
         double temp = 1;
         for (int i = 0; i < second; i++) {
@@ -91,6 +98,7 @@ public class Calculator {
     /**
      * Clears result variable
      */
+    @Override
     public void clear() {
         this.result = 0;
     }
@@ -102,6 +110,7 @@ public class Calculator {
      * @param operation operations + - * / ^
      * @param second    second number
      */
+    @Override
     public void calc(String operation, double first, double second) {
         switch (operation) {
             case "+":
