@@ -30,6 +30,8 @@ public class InteractRunner {
                 double second;
                 String operation;
 
+                reuse = validator.compare("Do you want reuse last result? y/n:", "y");
+
                 if (reuse) {
                     first = calculator.getResult();
                     System.out.println(first);
@@ -46,8 +48,6 @@ public class InteractRunner {
                                 first, operation, second, calculator.getResult()
                         )
                 );
-
-                reuse = validator.compare("Do you want reuse the result? y/n:", "y");
 
             } while (validator.compare("Do you want to continue? y/n", "y"));
         } catch (Exception e) {

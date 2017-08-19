@@ -15,7 +15,7 @@ public class InteractRunnerTest {
 
     @Test
     public void whenTakePlusShouldSummarize() {
-        MockIO mock = new MockIO(new String[]{"1", "+", "1", "n", "n"});
+        MockIO mock = new MockIO(new String[]{"n", "1", "+", "1", "n"});
         new InteractRunner(
                 new Calculator(),
                 mock

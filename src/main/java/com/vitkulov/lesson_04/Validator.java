@@ -4,7 +4,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Class for user data input validation.
@@ -37,7 +39,7 @@ public class Validator implements AutoCloseable {
             } catch (NumberFormatException n) {
                 invalid = true;
                 LOG.error("Convert number error", n);
-                System.out.println("Please enter the number.");
+                System.out.println("Error read, please enter the number.");
             }
         } while (invalid);
         throw new NumberFormatException();
@@ -83,5 +85,30 @@ public class Validator implements AutoCloseable {
 
     @Override
     public void close() throws Exception {
+    }
+
+    public String getString(String message) {
+        System.out.println(message);
+        return this.io.read();
+    }
+
+    public Integer getIntFromList(final String message, final Collection<Integer> keys) {
+        boolean invalid = false;
+        do {
+            try {
+                System.out.println(message);
+                final int result = Integer.parseInt(this.io.read());
+                if (keys.contains(result)) {
+                    return result;
+                } else {
+                    throw new NumberFormatException();
+                }
+            } catch (NumberFormatException n) {
+                invalid = true;
+                LOG.error("Convert number error or key not present", n);
+                System.out.println("Entered key not present, please try again.");
+            }
+        } while (invalid);
+        throw new NumberFormatException();
     }
 }
