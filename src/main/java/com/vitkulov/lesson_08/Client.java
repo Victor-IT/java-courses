@@ -1,11 +1,16 @@
 package com.vitkulov.lesson_08;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Client {
     private int id;
     private String name;
     private List<Pet> petList;
+
+    public Client() {
+        this.petList = new ArrayList<>();
+    }
 
     public int getId() {
         return id;

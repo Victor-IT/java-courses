@@ -35,7 +35,7 @@ public class ClinicUI {
     }
 
     private void doAction(final Validator validator) {
-        this.actions.get(validator.getIntFromList("Enter operation : ", this.actions.keySet())
+        this.actions.get(validator.getIntFromList("Select action number : ", this.actions.keySet())
         ).execute(this.clinic, validator);
     }
 }

@@ -6,7 +6,6 @@ import org.slf4j.LoggerFactory;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * Class for user data input validation.
@@ -28,7 +27,7 @@ public class Validator implements AutoCloseable {
      * Repeats until input is correct
      *
      * @param message - prompt message
-     * @return int number
+     * @return double number
      */
     public double getDouble(String message) {
         boolean invalid;
@@ -46,11 +45,11 @@ public class Validator implements AutoCloseable {
     }
 
     /**
-     * Get string from input.
+     * Get string operator from input.
      * Repeats until the string is equals to one of arithmetic operators
      *
-     * @param message
-     * @return
+     * @param message - prompt message
+     * @return string operator symbol
      */
     public String getOperator(String message) {
 
@@ -87,13 +86,27 @@ public class Validator implements AutoCloseable {
     public void close() throws Exception {
     }
 
+    /**
+     * Get string from input
+     *
+     * @param message - prompt message
+     * @return string
+     */
     public String getString(String message) {
         System.out.println(message);
         return this.io.read();
     }
 
+    /**
+     * Get number from input.
+     * Repeat until input is equals to one of element in collection "keys"
+     *
+     * @param message - prompt message
+     * @param keys    - collection of elements for equals
+     * @return integer number
+     */
     public Integer getIntFromList(final String message, final Collection<Integer> keys) {
-        boolean invalid = false;
+        boolean invalid;
         do {
             try {
                 System.out.println(message);
@@ -107,6 +120,28 @@ public class Validator implements AutoCloseable {
                 invalid = true;
                 LOG.error("Convert number error or key not present", n);
                 System.out.println("Entered key not present, please try again.");
+            }
+        } while (invalid);
+        throw new NumberFormatException();
+    }
+
+    /**
+     * Get int from input
+     * Repeats until input is correct
+     *
+     * @param message - prompt message
+     * @return integer number
+     */
+    public int getInt(String message) {
+        boolean invalid;
+        do {
+            try {
+                System.out.println(message);
+                return Integer.parseInt(this.io.read());
+            } catch (NumberFormatException n) {
+                invalid = true;
+                LOG.error("Convert number error", n);
+                System.out.println("Error read, please enter the number.");
             }
         } while (invalid);
         throw new NumberFormatException();

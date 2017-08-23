@@ -26,8 +26,8 @@ public class Clinic implements IClinic {
     }
 
     @Override
-    public void editPet(final int id, final Pet pet) {
-        this.clients.get(id).editPet(pet);
+    public void editPet(final int clientId, final Pet pet) {
+        this.clients.get(clientId).editPet(pet);
     }
 
     @Override
@@ -52,11 +52,11 @@ public class Clinic implements IClinic {
     }
 
     @Override
-    public Collection<Client> searchPetByNick(String nick) {
+    public Collection<Client> searchPetByName(String name) {
         List<Client> result = new ArrayList<>();
         for (Client client : this.clients.values()) {
             for (Pet pet : client.getPetList()) {
-                if (pet.getName().contains(nick)) {
+                if (pet.getName().contains(name)) {
                     result.add(client);
                 }
             }
