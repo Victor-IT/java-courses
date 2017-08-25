@@ -12,6 +12,11 @@ public class Client {
         this.petList = new ArrayList<>();
     }
 
+    public Client(String name) {
+        this();
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

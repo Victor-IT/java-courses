@@ -1,6 +1,5 @@
 package com.vitkulov.lesson_04;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import static org.hamcrest.core.Is.is;
