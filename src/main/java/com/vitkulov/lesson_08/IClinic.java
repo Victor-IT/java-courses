@@ -1,11 +1,14 @@
 package com.vitkulov.lesson_08;
 
+import com.vitkulov.lesson_08.exceptions.ClientException;
+import com.vitkulov.lesson_08.exceptions.PetException;
+
 import java.util.Collection;
 
 public interface IClinic {
-    void addClient(Client client);
+    void addClient(Client client) throws ClientException;
 
-    void addPet(int id, Pet pet);
+    void addPet(int id, Pet pet) throws PetException;
 
     void editClient(Client client);
 

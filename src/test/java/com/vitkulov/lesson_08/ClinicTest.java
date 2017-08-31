@@ -1,5 +1,8 @@
 package com.vitkulov.lesson_08;
 
+import com.vitkulov.lesson_08.exceptions.ClientException;
+import com.vitkulov.lesson_08.exceptions.PetException;
+import com.vitkulov.lesson_08.exceptions.UserException;
 import org.junit.Test;
 
 import java.util.Collection;
@@ -13,24 +16,46 @@ public class ClinicTest {
     private final Clinic clinic = new Clinic();
 
     @Test
-    public void addClient() {
+    public void addClient() throws ClientException {
         Client client = new Client("Ivan");
         Client client2 = new Client("Peter");
         Client client3 = new Client("Ivan");
 
         clinic.addClient(client);
-        clinic.addClient(client); // trying to add same client already exist
         clinic.addClient(client2);
         clinic.addClient(client3);
 
         Client result = clinic.getClientById(1);
-
         assertThat(result.equals(client), is(true));
         assertThat(result.equals(client3), is(false));
     }
 
+    @Test(expected = ClientException.class)
+    public void addClientShouldThrowException() throws ClientException {
+        Client client = new Client("Ivan");
+
+        clinic.addClient(client);
+        clinic.addClient(client); // trying to add same client already exist
+
+        Client result = clinic.getClientById(1);
+        assertThat(result.equals(client), is(true));
+    }
+
     @Test
-    public void addPet() {
+    public void addPet() throws UserException {
+        Client client = new Client("Ivan");
+        Pet dog = new Dog("Dogie");
+        clinic.addClient(client);
+        clinic.addPet(1, dog);
+
+        Client resultClient = clinic.getClientById(1);
+        Pet resultPet = resultClient.getPetById(1);
+        assertThat(resultClient.getName(), is("Ivan"));
+        assertThat(resultPet.equals(dog), is(true));
+    }
+
+    @Test(expected = PetException.class)
+    public void addPetShouldThrowException() throws UserException {
         Client client = new Client("Ivan");
         Pet dog = new Dog("Dogie");
         clinic.addClient(client);
@@ -39,13 +64,12 @@ public class ClinicTest {
 
         Client resultClient = clinic.getClientById(1);
         Pet resultPet = resultClient.getPetById(1);
-
         assertThat(resultClient.getName(), is("Ivan"));
         assertThat(resultPet.equals(dog), is(true));
     }
 
     @Test
-    public void editClient() {
+    public void editClient() throws ClientException {
         Client client = new Client("Ivan");
         clinic.addClient(client);
         Client result = clinic.getClientById(client.getId());
@@ -57,7 +81,7 @@ public class ClinicTest {
     }
 
     @Test
-    public void editPet() {
+    public void editPet() throws UserException {
         Client client = new Client("Ivan");
         Pet pet = new Dog("Dogie");
         clinic.addClient(client);
@@ -77,7 +101,7 @@ public class ClinicTest {
     }
 
     @Test
-    public void deleteClient() {
+    public void deleteClient() throws ClientException {
         Client client = new Client("Ivan");
         clinic.addClient(client);
 
@@ -90,7 +114,7 @@ public class ClinicTest {
     }
 
     @Test
-    public void deletePet() {
+    public void deletePet() throws UserException {
         Client client = new Client("Ivan");
         Pet pet = new Dog("Gray");
         clinic.addClient(client);
@@ -105,7 +129,7 @@ public class ClinicTest {
     }
 
     @Test
-    public void searchClientByName() {
+    public void searchClientByName() throws ClientException {
         Client client = new Client("Ivan");
         clinic.addClient(client);
 
@@ -116,7 +140,7 @@ public class ClinicTest {
     }
 
     @Test
-    public void searchPetByName() {
+    public void searchPetByName() throws UserException {
         Client client = new Client("Ivan");
         Pet pet = new Dog("Gray");
         clinic.addClient(client);
@@ -130,7 +154,7 @@ public class ClinicTest {
     }
 
     @Test
-    public void getClients() {
+    public void getClients() throws ClientException {
         Client client1 = new Client("Ivan");
         Client client2 = new Client("Victor");
         clinic.addClient(client1);
@@ -141,7 +165,7 @@ public class ClinicTest {
     }
 
     @Test
-    public void getClientById() {
+    public void getClientById() throws ClientException {
         Client client1 = new Client("Ivan");
         Client client2 = new Client("Victor");
         clinic.addClient(client1);

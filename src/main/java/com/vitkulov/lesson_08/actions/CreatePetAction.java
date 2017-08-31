@@ -5,6 +5,7 @@ import com.vitkulov.lesson_08.Cat;
 import com.vitkulov.lesson_08.Dog;
 import com.vitkulov.lesson_08.IClinic;
 import com.vitkulov.lesson_08.Pet;
+import com.vitkulov.lesson_08.exceptions.PetException;
 
 import java.util.Arrays;
 
@@ -15,7 +16,11 @@ public class CreatePetAction implements Action {
         int type = validator.getIntFromList("Select pet - 1. Dog, 2. Cat : ", Arrays.asList(1, 2));
         String petName = validator.getString("Enter pet name : ");
         Pet pet = type == 1 ? new Dog(petName) : new Cat(petName);
-        clinic.addPet(clientId, pet);
+        try {
+            clinic.addPet(clientId, pet);
+        } catch (PetException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

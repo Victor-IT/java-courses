@@ -3,6 +3,7 @@ package com.vitkulov.lesson_08.actions;
 import com.vitkulov.lesson_04.Validator;
 import com.vitkulov.lesson_08.Client;
 import com.vitkulov.lesson_08.IClinic;
+import com.vitkulov.lesson_08.exceptions.ClientException;
 
 public class CreateClientAction implements Action {
     @Override
@@ -10,7 +11,11 @@ public class CreateClientAction implements Action {
         final String name = validator.getString("Enter client name : ");
         final Client client = new Client();
         client.setName(name);
-        clinic.addClient(client);
+        try {
+            clinic.addClient(client);
+        } catch (ClientException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override

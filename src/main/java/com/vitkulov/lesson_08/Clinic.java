@@ -1,35 +1,38 @@
 package com.vitkulov.lesson_08;
 
+import com.vitkulov.lesson_08.exceptions.ClientException;
+import com.vitkulov.lesson_08.exceptions.PetException;
+
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Clinic implements IClinic {
     private final AtomicInteger clientIds = new AtomicInteger();
     private final AtomicInteger petIds = new AtomicInteger();
-    private Map<Integer, Client> clients = new LinkedHashMap<>();
+    private final Map<Integer, Client> clients = new LinkedHashMap<>();
 
     @Override
-    public void addClient(final Client client) {
+    public void addClient(final Client client) throws ClientException {
         Client temp = this.clients.get(client.getId());
 
-        if (temp != null) {
-            System.err.println("Client exist!");
-        } else {
+        if (temp == null) {
             client.setId(clientIds.incrementAndGet());
             this.clients.put(client.getId(), client);
+        } else {
+            throw new ClientException("Client exist!");
         }
     }
 
     @Override
-    public void addPet(final int clientId, final Pet pet) {
+    public void addPet(final int clientId, final Pet pet) throws PetException {
         Client client = this.clients.get(clientId);
         Pet temp = client.getPetById(pet.getId());
 
-        if (temp != null) {
-            System.err.println("Pet exist!");
-        } else {
+        if (temp == null) {
             pet.setId(petIds.incrementAndGet());
             client.addPet(pet);
+        } else {
+            throw new PetException("Pet exist!");
         }
     }
 
