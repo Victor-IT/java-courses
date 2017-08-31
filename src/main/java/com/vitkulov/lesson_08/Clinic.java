@@ -6,18 +6,31 @@ import java.util.concurrent.atomic.AtomicInteger;
 public class Clinic implements IClinic {
     private final AtomicInteger clientIds = new AtomicInteger();
     private final AtomicInteger petIds = new AtomicInteger();
-    private final Map<Integer, Client> clients = new LinkedHashMap<>();
+    private Map<Integer, Client> clients = new LinkedHashMap<>();
 
     @Override
     public void addClient(final Client client) {
-        client.setId(clientIds.incrementAndGet());
-        this.clients.put(client.getId(), client);
+        Client temp = this.clients.get(client.getId());
+
+        if (temp != null) {
+            System.err.println("Client exist!");
+        } else {
+            client.setId(clientIds.incrementAndGet());
+            this.clients.put(client.getId(), client);
+        }
     }
 
     @Override
-    public void addPet(final int id, final Pet pet) {
-        pet.setId(petIds.incrementAndGet());
-        this.clients.get(id).addPet(pet);
+    public void addPet(final int clientId, final Pet pet) {
+        Client client = this.clients.get(clientId);
+        Pet temp = client.getPetById(pet.getId());
+
+        if (temp != null) {
+            System.err.println("Pet exist!");
+        } else {
+            pet.setId(petIds.incrementAndGet());
+            client.addPet(pet);
+        }
     }
 
     @Override
@@ -32,7 +45,7 @@ public class Clinic implements IClinic {
 
     @Override
     public void deleteClient(final int clientId) {
-        this.clients.remove(this.getClientById(clientId));
+        this.clients.remove(clientId);
     }
 
     @Override
