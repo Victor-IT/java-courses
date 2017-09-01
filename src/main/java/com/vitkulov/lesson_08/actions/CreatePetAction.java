@@ -5,7 +5,7 @@ import com.vitkulov.lesson_08.Cat;
 import com.vitkulov.lesson_08.Dog;
 import com.vitkulov.lesson_08.IClinic;
 import com.vitkulov.lesson_08.Pet;
-import com.vitkulov.lesson_08.exceptions.PetException;
+import com.vitkulov.lesson_08.exceptions.ClientException;
 
 import java.util.Arrays;
 
@@ -18,8 +18,8 @@ public class CreatePetAction implements Action {
         Pet pet = type == 1 ? new Dog(petName) : new Cat(petName);
         try {
             clinic.addPet(clientId, pet);
-        } catch (PetException e) {
-            e.printStackTrace();
+        } catch (ClientException e) {
+            System.err.println(e.getMessage());
         }
     }
 

@@ -1,22 +1,21 @@
 package com.vitkulov.lesson_08;
 
 import com.vitkulov.lesson_08.exceptions.ClientException;
-import com.vitkulov.lesson_08.exceptions.PetException;
 
 import java.util.Collection;
 
 public interface IClinic {
-    void addClient(Client client) throws ClientException;
+    void addClient(Client client);
 
-    void addPet(int id, Pet pet) throws PetException;
+    void addPet(int id, Pet pet) throws ClientException;
 
     void editClient(Client client);
 
-    void editPet(int clientId, Pet pet);
+    void editPet(int clientId, Pet pet) throws ClientException;
 
     void deleteClient(int id);
 
-    void deletePet(int clientId, int petId);
+    void deletePet(int clientId, int petId) throws ClientException;
 
     /**
      * Get client list with defined name
@@ -34,5 +33,5 @@ public interface IClinic {
 
     Collection<Client> getClients();
 
-    Client getClientById(int clientId);
+    Client getClientById(int clientId) throws ClientException;
 }

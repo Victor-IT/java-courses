@@ -4,12 +4,19 @@ import com.vitkulov.lesson_04.Validator;
 import com.vitkulov.lesson_08.Client;
 import com.vitkulov.lesson_08.IClinic;
 
+import java.util.Collection;
+
 public class SearchPetAction implements Action {
     @Override
     public void execute(IClinic clinic, Validator validator) {
         String name = validator.getString("Enter pet's name : ");
-        for (Client client : clinic.searchPetByName(name)) {
-            System.out.println(client);
+        Collection<Client> clients = clinic.searchPetByName(name);
+        if (clients.size() > 0) {
+            for (Client client : clients) {
+                System.out.println(client);
+            }
+        } else {
+            System.out.println("No matches");
         }
     }
 

@@ -21,8 +21,8 @@ public class ClinicUI {
     }
 
     public void show() {
-        this.intro();
         do {
+            this.intro();
             doAction(validator);
         } while (validator.compare("Do you want to continue? (y)", "y"));
     }

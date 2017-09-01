@@ -1,7 +1,6 @@
 package com.vitkulov.lesson_08;
 
 import com.vitkulov.lesson_08.exceptions.ClientException;
-import com.vitkulov.lesson_08.exceptions.PetException;
 import com.vitkulov.lesson_08.exceptions.UserException;
 import org.junit.Test;
 
@@ -30,37 +29,12 @@ public class ClinicTest {
         assertThat(result.equals(client3), is(false));
     }
 
-    @Test(expected = ClientException.class)
-    public void addClientShouldThrowException() throws ClientException {
-        Client client = new Client("Ivan");
-
-        clinic.addClient(client);
-        clinic.addClient(client); // trying to add same client already exist
-
-        Client result = clinic.getClientById(1);
-        assertThat(result.equals(client), is(true));
-    }
-
     @Test
     public void addPet() throws UserException {
         Client client = new Client("Ivan");
         Pet dog = new Dog("Dogie");
         clinic.addClient(client);
         clinic.addPet(1, dog);
-
-        Client resultClient = clinic.getClientById(1);
-        Pet resultPet = resultClient.getPetById(1);
-        assertThat(resultClient.getName(), is("Ivan"));
-        assertThat(resultPet.equals(dog), is(true));
-    }
-
-    @Test(expected = PetException.class)
-    public void addPetShouldThrowException() throws UserException {
-        Client client = new Client("Ivan");
-        Pet dog = new Dog("Dogie");
-        clinic.addClient(client);
-        clinic.addPet(1, dog);
-        clinic.addPet(1, dog); // trying to add same pet to client already exist
 
         Client resultClient = clinic.getClientById(1);
         Pet resultPet = resultClient.getPetById(1);
@@ -100,7 +74,7 @@ public class ClinicTest {
         assertThat(result == result2, is(false));
     }
 
-    @Test
+    @Test(expected = ClientException.class)
     public void deleteClient() throws ClientException {
         Client client = new Client("Ivan");
         clinic.addClient(client);
@@ -110,7 +84,6 @@ public class ClinicTest {
 
         clinic.deleteClient(1);
         Client result2 = clinic.getClientById(1);
-        assertThat(result2, is(nullValue()));
     }
 
     @Test

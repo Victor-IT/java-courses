@@ -12,16 +12,23 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class CreatePetActionTest {
+    Action createPetAction = new CreatePetAction();
+    MockIO mockIO = new MockIO(new String[]{"1", "1", "Gray"});
+    Clinic clinic = new Clinic();
+
     @Test
     public void execute() throws ClientException {
-        Action createPetAction = new CreatePetAction();
-        MockIO mockIO = new MockIO(new String[]{"1", "1", "Gray"});
-        Clinic clinic = new Clinic();
         clinic.addClient(new Client("Ivan"));
-
         createPetAction.execute(clinic, new Validator(mockIO));
         Pet result = clinic.getClientById(1).getPetById(1);
         assertThat(result.getName(), is("Gray"));
+    }
+
+    @Test(expected = ClientException.class)
+    public void executeShouldThrowClientException() throws ClientException {
+        clinic.addClient(new Client("Ivan"));
+        createPetAction.execute(clinic, new Validator(mockIO));
+        Pet result = clinic.getClientById(2).getPetById(1);
     }
 
 }
