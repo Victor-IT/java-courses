@@ -10,13 +10,13 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
 
 public class CreateClientActionTest {
+    Action createClient = new CreateClientAction();
+    MockIO mock = new MockIO(new String[]{"Ivan"});
+    Clinic clinic = new Clinic();
+    
     @Test
     public void execute() throws ClientException {
-        Action createClient = new CreateClientAction();
-        MockIO mock = new MockIO(new String[]{"Ivan"});
-        Clinic clinic = new Clinic();
         createClient.execute(clinic, new Validator(mock));
-
         String result = clinic.getClientById(1).getName();
         assertThat(result, is("Ivan"));
     }
